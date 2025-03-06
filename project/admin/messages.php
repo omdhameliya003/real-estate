@@ -10,6 +10,7 @@ include "../components/connect.php";
 if (isset($_GET['delete_message'])) {
     $message_id = $_GET['delete_message'];
     $conn->query("DELETE FROM messages WHERE id='$message_id'");
+    $_SESSION['success_msg'][] = "message deleted successfully!";
     header("Location: messages.php");
 }
 $messages = $conn->query("SELECT * FROM messages ORDER BY submitted_at DESC");
@@ -48,7 +49,9 @@ $messages = $conn->query("SELECT * FROM messages ORDER BY submitted_at DESC");
                             <td><?php echo $msg['submitted_at']; ?></td>
                             <td class="messages-btn">
                                 <button><a href="reply_message.php?message_id=<?php echo $msg['id']; ?>">replay</a></button>
-                                <button><a href="?delete_message=<?php echo $msg['id']; ?>">delete</a></button>
+                                <!-- <button onclick="confirmDelete('<?php #echo $msg['id']; ?>')"><a href="?delete_message=<?php #echo $msg['id']; ?>">delete</a></button> -->
+
+                                <button onclick="confirmDelete('<?php echo $msg['id']; ?>')">delete</button>
                             </td>
                         </tr>
                     <?php } ?>
@@ -57,6 +60,25 @@ $messages = $conn->query("SELECT * FROM messages ORDER BY submitted_at DESC");
             </table>
         </div>
     </div>
+    <script>
+           function confirmDelete(messageId) {
+                    Swal.fire({
+                        title: "Are you sure?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#d33",
+                        cancelButtonColor: "#3085d6",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "messages.php?delete_message=" + messageId;
+                        }
+                    });
+                }
+           
+ </script>
+   
 </body>
 
 </html>

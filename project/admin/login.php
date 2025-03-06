@@ -1,7 +1,7 @@
 <?php
 session_name("ADMIN_SESSION");
 session_start();
-
+include "../components/alert.php";
 // Admin Login (Static Credentials)
 $admin_username = 'admin';
 $admin_password = 'admin';
@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     if ($username === $admin_username && $password === $admin_password) {
         $_SESSION['admin_logged_in'] = true;
+        $_SESSION['success_msg'][] = "Login Successful!";
         header("Location: dashboard.php");
         exit;
     } else {

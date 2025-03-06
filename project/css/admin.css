@@ -219,6 +219,7 @@ table button{
    border: 1px solid gray;
    background-color:#555 ;
    border-radius: 5px;
+   color: white;
 }
 table button a{
    color: white;

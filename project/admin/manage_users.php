@@ -10,7 +10,9 @@ include "../components/connect.php";
 if (isset($_GET['delete_user'])) {
     $user_id = $_GET['delete_user'];
     $conn->query("DELETE FROM user_ragister WHERE user_id='$user_id'");
+    $_SESSION['success_msg'][] = "User deleted successfully!";
     header("Location: manage_users.php");
+    exit;
 }
 
 $users = $conn->query("SELECT * FROM user_ragister ORDER BY user_id DESC");
@@ -48,7 +50,9 @@ $users = $conn->query("SELECT * FROM user_ragister ORDER BY user_id DESC");
                             <td><?php echo $user['user_id']; ?></td>
                             <td><?php echo $user['fname']; ?></td>
                             <td><?php echo $user['email']; ?></td>
-                            <td><button><a href="?delete_user=<?php echo $user['user_id']; ?>">Delete</a></button></td>
+                            <!-- <td><button onclick="confirmDelete('<?php #echo $user['user_id']; ?>')" ><a href="?delete_user=<?php #echo $user['user_id']; ?>">Delete</a></button></td> -->
+
+                            <td><button onclick="confirmDelete('<?php echo $user['user_id']; ?>')" >Delete</a></button></td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -68,6 +72,22 @@ $users = $conn->query("SELECT * FROM user_ragister ORDER BY user_id DESC");
                 }
             });
         }
+
+        function confirmDelete(userId) {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "manage_users.php?delete_user=" + userId;
+        }
+    });
+}
     </script>
 </body>
 </html>

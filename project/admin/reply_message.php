@@ -1,5 +1,5 @@
 <?php
-
+session_name("ADMIN_SESSION");
 session_start();
 
 if (!isset($_SESSION['admin_logged_in'])) {
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $admin_reply = $conn->real_escape_string($_POST['reply']);
     $user_email = $message_data['email'];
     $user_message = $message_data['message'];
-    $subject = "Reply to Your Message - Admin Response";
+    $subject = "Reply to Your Message - Admin Response from Wonder Property";
 
     // Construct email body
     $email_body = '
@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ' . nl2br(htmlspecialchars($admin_reply)) . '
         </div>
         <p>If you have any further questions, feel free to contact us.</p>
-        <p>Best Regards,<br><strong>Admin Team</strong></p>
+        <p>Best Regards,<br><strong>Admin Team</strong><br><strong>Wonder Property</strong></p>
         <div class="footer">
             &copy; ' . date("Y") . ' Your Company | All Rights Reserved
         </div>
@@ -127,6 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!$mail->Send()) {
         echo $mail->ErrorInfo;
     } else {
+       $_SESSION['success_msg'][] = "mail sent successfully!";
         header("Location: messages.php");
     } 
 }
