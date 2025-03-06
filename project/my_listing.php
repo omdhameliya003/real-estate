@@ -13,6 +13,7 @@
   <body>
 
   <?php  
+  session_name("USER_SESSION");
   session_start();
   $user_id=$_SESSION['user_id'];
 

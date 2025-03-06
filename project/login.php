@@ -1,5 +1,6 @@
 
 <?php
+session_name("USER_SESSION");
 session_start();
 include("components/connect.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login']) ) {

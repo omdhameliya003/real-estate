@@ -105,7 +105,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </body>
 </html>';
 
-
     $mail = new PHPMailer();
     $mail->IsSMTP();
     $mail->SMTPAuth = true;
@@ -114,7 +113,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $mail->Port = 587;
     $mail->IsHTML(true);
     $mail->CharSet = 'UTF-8';
-    //$mail->SMTPDebug = 2; 
     $mail->Username = "omdhameliya003@gmail.com";
     $mail->Password = "pekhrgxqptmucmcn";
     $mail->SetFrom("omdhameliya003@gmail.com");
@@ -130,128 +128,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo $mail->ErrorInfo;
     } else {
         header("Location: messages.php");
-        // return 'Sent';
-    }
-
-
-
-    // // Send email using PHP mail() function
-    // $headers = "From: omdhameliya003@gmail.com\r\n";
-    // if (mail($user_email, $subject, $email_body, $headers)) {
-    //     echo "<script>alert('Reply sent successfully!'); window.location='messages.php';</script>";
-    // } else {
-    //     echo "<script>alert('Failed to send reply. Please try again.');</script>";
-    // }
+    } 
 }
 ?>
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Reply to Message</title>
     <link rel="stylesheet" type="text/css" href="../css/admin.css">
-    <style>
-        /* Reply Message Page Styling */
-        .content {
-            max-width: 700px;
-            margin: 50px auto;
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            max-height: 550px;
-        }
-
-        .content h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        label {
-            font-size: 16px;
-            font-weight: bold;
-            text-align: left;
-        }
-
-        input[type="email"],
-        textarea {
-            width: 100%;
-            padding: 10px;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        button {
-            /* background: #007bff; */
-            background: #555;
-            color: white;
-            font-size: 16px;
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background: #0056b3;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .content {
-                width: 90%;
-                padding: 15px;
-            }
-
-            input[type="email"],
-            textarea {
-                font-size: 14px;
-                padding: 8px;
-            }
-
-            button {
-                font-size: 14px;
-                padding: 10px;
-            }
-        }
-
-        @media (max-width: 500px) {
-            .content h2 {
-                font-size: 20px;
-            }
-
-            label {
-                font-size: 14px;
-            }
-
-            button {
-                font-size: 14px;
-                padding: 10px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body>
     <div class="admin-container">
         <?php include "admin_sidebar.php"; ?>
-        <div class="content">
+        <div class="content email-form">
             <h2>Reply to User Message</h2>
             <form method="post">
                 <label>User Email:</label>

@@ -1,4 +1,5 @@
 <?php
+session_name("ADMIN_SESSION");
 session_start();
 
 // Admin Login (Static Credentials)

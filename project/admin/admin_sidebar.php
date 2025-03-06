@@ -1,7 +1,4 @@
 <?php
-// session_start();
-
-// Default image
 $default_image = '../images/pic-3';
 
 // Check if an image is already uploaded and stored in session

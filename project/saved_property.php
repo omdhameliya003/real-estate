@@ -10,6 +10,7 @@
 </head>
 <body>
     <?php  
+    session_name("USER_SESSION");
     session_start();
     $saveby_user=$_SESSION['user_id'];
     include("components/header.php"); 
