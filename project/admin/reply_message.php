@@ -144,7 +144,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <div class="admin-container">
         <?php include "admin_sidebar.php"; ?>
-        <div class="content email-form">
+        <div class="content">
+            <div class="email-form">
+
+            
             <h2>Reply to User Message</h2>
             <form method="post">
                 <label>User Email:</label>
@@ -158,6 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 <button type="submit">Send Email</button>
             </form>
+            </div>
         </div>
     </div>
 </body>
