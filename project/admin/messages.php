@@ -36,7 +36,7 @@ $messages = $conn->query("SELECT * FROM messages ORDER BY submitted_at DESC");
                         <th>Email</th>
                         <th>Message</th>
                         <th>Date</th>
-                        <th>operation</th>
+                        <th class="action">operation</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,11 +46,10 @@ $messages = $conn->query("SELECT * FROM messages ORDER BY submitted_at DESC");
                             <td><?php echo $msg['name']; ?></td>
                             <td><?php echo $msg['email']; ?></td>
                             <td class="message-column"><?php echo $msg['message']; ?></td>
-                            <td><?php echo $msg['submitted_at']; ?></td>
-                            <td class="messages-btn">
+                            <!-- <td><?php #echo $msg['submitted_at']; ?></td> -->
+                            <td><?php echo date("Y-m-d", strtotime($msg['submitted_at'])); ?></td>
+                            <td class="action-btn">
                                 <button><a href="reply_message.php?message_id=<?php echo $msg['id']; ?>">replay</a></button>
-                                <!-- <button onclick="confirmDelete('<?php #echo $msg['id']; ?>')"><a href="?delete_message=<?php #echo $msg['id']; ?>">delete</a></button> -->
-
                                 <button onclick="confirmDelete('<?php echo $msg['id']; ?>')">delete</button>
                             </td>
                         </tr>

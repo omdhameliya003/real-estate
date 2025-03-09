@@ -34,21 +34,23 @@ include "../components/connect.php";
                         <th>Price</th>
                         <th>Rent</th>
                         <th>City</th>
-                        <th>Action</th>
+                        <th class="action">Action</th>
                     </tr>
                 </thead>
                 <tbody id="propertyTable">
                     <?php 
                     $properties = $conn->query("SELECT id, property_name, type, offer, price, city FROM postproperty ORDER BY id DESC");
                     while ($property = $properties->fetch_assoc()) { ?>
-                        <tr>
+                        <tr id="row_<?php echo $property['id']; ?>">
                             <td><?php echo $property['property_name']; ?></td>
                             <td><?php echo $property['type']; ?></td>
                             <td><?php echo $property['offer']; ?></td>
                             <td><?php echo ($property['offer'] == 'sale') ? $property['price'] : '-'; ?></td>
                             <td><?php echo ($property['offer'] == 'rent') ? $property['price'] : '-'; ?></td>
                             <td><?php echo $property['city']; ?></td>
-                            <td><button><a href="view_property_admin.php?id=<?php echo $property['id']; ?>">View</a></button></td>
+                            <td class="action-btn "><button><a href="view_property_admin.php?id=<?php echo $property['id']; ?>">View</a></button>
+                            <button class="delete-btn" onclick="deleteProperty(<?php echo $property['id']; ?>)">Delete</button>
+                        </td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -68,6 +70,30 @@ include "../components/connect.php";
                 }
             });
         }
+
+        function deleteProperty(propertyId) {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "This property will be deleted permanently!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.post("delete_property_byadmin.php", {id: propertyId}, function(response) {
+                if (response.trim() === "success") {
+                    Swal.fire("Deleted!", "Property has been deleted.", "success")
+                    .then(() => {
+                        // document.getElementById("row_" + propertyId).remove(); // Remove row after success
+                    });
+                } 
+            });
+        }
+    });
+}
+
     </script>
 </body>
 </html>
