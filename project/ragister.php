@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </head>
   <body>
 
-    <div class="form-container">
+    <div class="form-container form-center">
       <div class="my-form">
         <form action="<?=$_SERVER['PHP_SELF'];?>" onsubmit="return funcvalidation()" method="post">
           <h2>Create An Account</h2>

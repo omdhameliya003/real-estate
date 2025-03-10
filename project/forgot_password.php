@@ -48,8 +48,37 @@ if (isset($_POST['send_otp'])) {
             $mail->Username = 'omdhameliya003@gmail.com'; // Your SMTP email
             $mail->Password = 'pekhrgxqptmucmcn'; // Your SMTP password
             $mail->SetFrom("omdhameliya003@gmail.com");
-            $mail->Subject = 'Your OTP Code for reset password';
-            $mail->Body = 'Your OTP is: ' . $_SESSION['otp'];
+            $mail->Subject = 'Password Reset OTP Verification';
+            // $mail->Body = 'Your OTP is: ' . $_SESSION['otp'];
+            $mail->Body = "<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Password Reset OTP</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; text-align: center; }
+        .container { max-width: 500px; background: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); margin: auto; }
+        h2 { color: #333; }
+        p { font-size: 16px; color: #555; }
+        .otp { font-size: 22px; font-weight: bold; color: #d9534f; background: #f8d7da; padding: 10px; display: inline-block; border-radius: 5px; }
+        .footer { font-size: 14px; color: #777; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class='container'>
+        <h2>🔐 Password Reset Request</h2>
+        <p>We received a request to reset your password. Use the OTP below to proceed:</p>
+        <p class='otp'>" . $_SESSION['otp'] . "</p>
+        <p>Enter this OTP on the password reset page to continue.</p>
+        <p>If you did not request this, please ignore this email.</p>
+        <div class='footer'>
+            <p>Best regards,<br><strong>[Your Website Name]</strong></p>
+        </div>
+    </div>
+</body>
+</html>
+";
             $mail->addAddress($email);
             $mail->SMTPOptions = array('ssl' => array(
                 'verify_peer' => false,
@@ -103,19 +132,19 @@ if (isset($_POST['reset_password'])) {
         $confirm_password = $_POST['confirm_password'];
         $email = $_SESSION['email'];
 
-         // Validate password length
-    if (strlen($new_password) < 8) {
-        $_SESSION['warning_msg'][] = "Password must be at least 8 characters long!";
-        header("Location: forgot_password.php");
-        exit();
-    }
+        // Validate password length
+        if (strlen($new_password) < 8) {
+            $_SESSION['warning_msg'][] = "Password must be at least 8 characters long!";
+            header("Location: forgot_password.php");
+            exit();
+        }
 
-    // Check if password and confirm password match
-    if ($new_password !== $confirm_password) {
-        $_SESSION['warning_msg'][] = "Passwords or confirm password must be the same!!";
-        header("Location: forgot_password.php");
-        exit();
-    }
+        // Check if password and confirm password match
+        if ($new_password !== $confirm_password) {
+            $_SESSION['warning_msg'][] = "Passwords or confirm password must be the same!!";
+            header("Location: forgot_password.php");
+            exit();
+        }
 
         $update_query = $conn->prepare("UPDATE user_ragister SET password = ? WHERE email = ?");
         $update_query->bind_param("ss", $new_password, $email);
@@ -151,7 +180,7 @@ if (isset($_POST['reset_password'])) {
 </head>
 
 <body>
-    <div class="form-container">
+    <div class="form-container form-center">
         <div class="my-form">
             <h2>Forgot Password</h2>
             <!-- <p><?php #echo $msg; 
@@ -161,13 +190,13 @@ if (isset($_POST['reset_password'])) {
                 <!-- Email Input for Sending OTP -->
                 <form method="POST">
                     <input type="email" name="email" placeholder="Enter your email" required>
-                    <input type="submit" name="send_otp" value="Send OTP">
+                    <input class="btn" type="submit" name="send_otp" value="Send OTP">
                 </form>
             <?php } elseif (!isset($_SESSION['otp_verified'])) { ?>
                 <!-- OTP Verification Form -->
                 <form method="POST">
                     <input type="text" name="otp" placeholder="Enter OTP" required>
-                    <input type="submit" name="verify_otp" value="Verify OTP">
+                    <input class="btn" type="submit" name="verify_otp" value="Verify OTP">
                 </form>
             <?php } else { ?>
                 <!-- Reset Password Form -->
@@ -175,7 +204,7 @@ if (isset($_POST['reset_password'])) {
                     <input type="email" value="<?php echo $_SESSION['email']; ?>" readonly>
                     <input type="password" name="password" placeholder="New Password" required>
                     <input type="password" name="confirm_password" placeholder="Confirm Password" required>
-                    <input type="submit" name="reset_password" value="Reset Password">
+                    <input class="btn" type="submit" name="reset_password" value="Reset Password">
                 </form>
             <?php } ?>
 

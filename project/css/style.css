@@ -240,23 +240,30 @@ a {
 
 /* ------------------------ragister-form--------------------------- */
 .form-container {
-  width: 100%;
   max-width: 100%;
   text-align: center;
-  margin: 0px auto;
+  margin: 10px auto;
   padding: 0px 20px;
   /* background-color: #eee; */
+ 
+}
+.form-center{
+  width: 100%; 
+  max-width: 400px;
+  padding: 5px;
+  margin: 0px auto;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-}
+} 
 .my-form {
   padding: 10px;
   max-width: 400px;
   margin: 30px auto;
-  background-color: white;
+  background-color: white;  
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
 }
 
 .form-container .my-form form {
@@ -340,7 +347,6 @@ form .login-not-account{
 }
 /* -----------------------------ragister-form-end------------------------------------ */
 /* --------------------------------post-property-form----------------------------------- */
-
 #property-form {
   max-width: 1100px;
   border-radius: 8px;
@@ -1400,13 +1406,20 @@ footer {
     margin: 5px;
     padding: 0;
   }
+  .form-center{
+    max-width: 350px;
+  }
+  
 }
 @media screen and (max-width: 370px) {
   .menu-right ul {
     padding-left: 10px;
   }
-  .field-password {
+  /* .field-password {
     margin-right: 8px;
+  } */
+  .form-center{
+    max-width: 300px;
   }
   .listing-data-grid {
     grid-template-columns: auto;

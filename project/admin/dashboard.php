@@ -33,7 +33,8 @@ for ($i = 6; $i >= 0; $i--) {
 $latest_properties = $conn->query("SELECT property_name, type,offer, city FROM postproperty ORDER BY id DESC LIMIT 5");
 
 // Recent User Registrations
-$recent_users = $conn->query("SELECT user_id, fname, email FROM user_ragister ORDER BY user_id DESC LIMIT 5");
+$recent_users = $conn->query("SELECT user_id, fname, email FROM user_ragister ORDER BY created_at DESC LIMIT 5");
+
 
 // Top Performing Properties (Most Views or Saves)
 // $top_properties = $conn->query("SELECT property_name, views, saves FROM postproperty ORDER BY views DESC, saves DESC LIMIT 5");

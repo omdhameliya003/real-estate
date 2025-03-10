@@ -50,7 +50,7 @@ else {
     />
   </head>
   <body>
-    <div class="form-container">
+    <div class="form-container form-center">
       <div class="my-form">
         <form action="<?=$_SERVER['PHP_SELF'];?>" method="post">
           <h2>Login</h2>
