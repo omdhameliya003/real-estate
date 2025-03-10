@@ -1,6 +1,10 @@
 <?php
 session_name("USER_SESSION");
 session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
 include("components/connect.php");
 
 // Ensure the user is logged in
