@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
     displayAlert("warning", "warning_msg");
     displayAlert("info", "info_msg");
     displayAlert("error", "error_msg");
+    displayAlert("success", "temp_msg");
     ?>
 });
 </script>

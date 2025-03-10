@@ -240,11 +240,16 @@ a {
 
 /* ------------------------ragister-form--------------------------- */
 .form-container {
+  width: 100%;
   max-width: 100%;
   text-align: center;
   margin: 0px auto;
   padding: 0px 20px;
   /* background-color: #eee; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
 }
 .my-form {
   padding: 10px;
@@ -315,6 +320,23 @@ form input[type="submit"]:hover,
 .view_more button:hover,
 .add_mylisting_btn:hover {
   background-color: black !important;
+}
+
+form .forgot-pass{
+  opacity: 0.6;
+  text-align: end;
+  padding: 10px;
+}
+.forgot-pass a{
+  color: #303030;
+}
+ .forgot-pass a:hover{
+  color: #007BFF;
+}
+form .login-not-account{
+  margin-top: 10px;
+  /* text-align: start;
+  padding-left: 10px; */
 }
 /* -----------------------------ragister-form-end------------------------------------ */
 /* --------------------------------post-property-form----------------------------------- */
@@ -945,10 +967,10 @@ form input[type="submit"]:hover,
   margin-bottom: 20px;
 }
 .comment-form textarea {
-  max-width:700px;
+  /* max-width:780px; */
   width: 100%;
   padding: 10px;
-  margin:10px;
+  margin:10px auto;
   border: 1px solid #ddd;
   border-radius: 5px;
   resize: none;

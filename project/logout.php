@@ -1,5 +1,5 @@
 <?php
- include("<components/alert.php");
+//  include("<components/alert.php");
 session_name("USER_SESSION");
 session_start();
 session_destroy();

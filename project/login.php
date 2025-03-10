@@ -71,8 +71,11 @@ else {
             />
             <i class="fa fa-eye field-icon" id="eye" aria-hidden="true"></i>
           </div>
+          <div class="forgot-pass">
+            <a href="forgot_password.php">Forgot Password?</a>
+          </div>
 
-          <p>don't have an account? <a href="ragister.php">Ragister Now</a></p>
+          <p class="login-not-account">don't have an account? <a href="ragister.php">Ragister Now</a></p>
           <input type="submit" value="Login Now" name="login" class="btn" />
         </form>
       </div>
