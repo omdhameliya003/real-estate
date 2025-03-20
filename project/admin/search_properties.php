@@ -20,7 +20,9 @@ if ($result->num_rows > 0) {
             <td><?php echo ($property['offer'] == 'sale') ? $property['price'] : '-'; ?></td>
             <td><?php echo ($property['offer'] == 'rent') ? $property['price'] : '-'; ?></td>
             <td><?php echo $property['city']; ?></td>
-            <td><button><a href="../view_property.php?id=<?php echo $property['id']; ?>">View</a></button></td>
+            <td class="action-btn "><button><a href="../view_property.php?id=<?php echo $property['id']; ?>">View</a></button>
+            <button class="delete-btn" onclick="deleteProperty(<?php echo $property['id']; ?>)">Delete</button>
+        </td>
         </tr>
     <?php }
 } else {
