@@ -1,3 +1,42 @@
+<?php
+// Include database connection
+include_once("components/connect.php");
+
+// Check if the session is already started
+if (session_status() == PHP_SESSION_NONE) {
+    session_name("USER_SESSION");
+    session_start();
+}
+
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+
+    // Check if user exists in the database
+    $check_user = mysqli_query($conn, "SELECT user_id FROM user_ragister WHERE user_id = '$user_id'");
+
+    if (mysqli_num_rows($check_user) == 0) {
+  
+      $_SESSION['account_deleted'] = true;
+     
+  }
+
+  if (isset($_SESSION['account_deleted'])) {
+    echo '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+    echo '<script>
+        Swal.fire({
+            icon: "error",
+            title: "Account Deleted",
+            text: "Your account has been removed. Please contact support.",
+            confirmButtonColor: "#d33"
+        }).then(() => {
+            window.location.href = "logout.php"; 
+        });
+    </script>';
+    exit();
+}
+}
+?>
+
 
 <div class="header-container">
   <header class="header-section">

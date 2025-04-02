@@ -29,7 +29,8 @@ if ($action == 'save') {
 
         if (mysqli_query($conn, $query)) {
             $_SESSION['success_msg'][] = "Property saved successfully";
-          echo "<script> window.history.back();</script>";
+            header("Location: " . $_SERVER['HTTP_REFERER']); 
+        //   echo "<script> window.history.back();</script>";
           exit();
        } else {
         echo "Error: " . mysqli_error($conn);
@@ -42,7 +43,8 @@ if ($action == 'save') {
     
     if (mysqli_query($conn, $query)) {
         $_SESSION['success_msg'][] = "Property removed from saved list!";
-    echo "<script> window.history.back();</script>";
+        header("Location: " . $_SERVER['HTTP_REFERER']); 
+    // echo "<script> window.history.back();</script>";
     exit();
 } else {
     echo "Error: " . mysqli_error($conn);

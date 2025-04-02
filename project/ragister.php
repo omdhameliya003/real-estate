@@ -26,6 +26,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(isset($user_id) &&
     isset($fname) && isset($lname)&& isset($age) && isset($email) && isset($mobile) && isset($password) && isset($con_pass)){
 
+      $check_email = mysqli_query($conn, "SELECT * FROM user_ragister WHERE email = '$email'");
+
+      if (mysqli_num_rows($check_email) > 0) {
+          $_SESSION['error_msg'][] = "Email already registered! Please use another email.";
+          header("Location: ragister.php");
+          exit();
+      }      
+
         $sql = "INSERT INTO user_ragister (user_id, fname, lname, age, email, mobile, password) 
                 VALUES ('$user_id', '$fname', '$lname', '$age', '$email', '$mobile', '$password')";
 

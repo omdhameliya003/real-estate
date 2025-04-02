@@ -8,13 +8,14 @@ if (!isset($_SESSION['user_id'])) {
 include("components/connect.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $user_id=$_SESSION['user_id'];
     // Retrieve form data
     $name = $conn->real_escape_string(trim($_POST['name']));
     $email = $conn->real_escape_string(trim($_POST['email']));
     $message = $conn->real_escape_string(trim($_POST['message']));
 
     // Insert the data into the `messages` table
-    $sql = "INSERT INTO messages (name, email, message) VALUES ('$name', '$email', '$message')";
+    $sql = "INSERT INTO messages (name, email, message,user_id) VALUES ('$name', '$email', '$message','$user_id')";
 
     if ($conn->query($sql) === TRUE) {
       $_SESSION['success_msg'][] = "Your message has been sent successfully!";

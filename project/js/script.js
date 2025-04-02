@@ -164,16 +164,39 @@ function funcvalidation() {
   }
 
   //  validation for password
+  // if (password === "") {
+  //   errpassword.innerHTML = "*password is not valid to empty.";
+  //   return (isValid = false);
+  // } else if (password.length < 8) {
+  //   errpassword.innerHTML =
+  //     "*password must contain more then 8 character or digit.";
+  //   return (isValid = false);
+  // } else {
+  //   errpassword.innerHTML = "";
+  // }
+
   if (password === "") {
-    errpassword.innerHTML = "*password is not valid to empty.";
+    errpassword.innerHTML = "*Password cannot be empty.";
     return (isValid = false);
-  } else if (password.length < 8) {
-    errpassword.innerHTML =
-      "*password must contain more then 8 character or digit.";
+} else if (password.length < 8) {
+    errpassword.innerHTML = "*Password must be at least 8 characters long.";
     return (isValid = false);
-  } else {
-    errpassword.innerHTML = "";
-  }
+} else if (!/[A-Z]/.test(password)) {
+    errpassword.innerHTML = "*Password must contain at least one uppercase letter.";
+    return (isValid = false);
+} else if (!/[a-z]/.test(password)) {
+    errpassword.innerHTML = "*Password must contain at least one lowercase letter.";
+    return (isValid = false);
+} else if (!/[0-9]/.test(password)) {
+    errpassword.innerHTML = "*Password must contain at least one digit.";
+    return (isValid = false);
+} else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+    errpassword.innerHTML = "*Password must contain at least one special character.";
+    return (isValid = false);
+} else {
+    errpassword.innerHTML = ""; // Clear error message if valid
+}
+
   //  validation for confirm password
   if (conpass === "" || conpass !== password) {
     errconpass.innerHTML = "*password or confirm password not match.";

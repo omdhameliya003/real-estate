@@ -160,6 +160,23 @@ if (!isset($_SESSION['user_id'])) {
     include("components/footer.php"); 
     ?>
    <!-- -------------------------------------------------------------------------->
+
+   <script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Restore scroll position after reload
+    if (localStorage.getItem("scrollY") !== null) {
+        window.scrollTo(0, localStorage.getItem("scrollY"));
+        localStorage.removeItem("scrollY"); // Clear after restoring
+    }
+
+    // Save scroll position before clicking Save/Remove
+    document.querySelectorAll("button a").forEach(function(button) { 
+        button.addEventListener("click", function() {
+            localStorage.setItem("scrollY", window.scrollY);
+        });
+    });
+});
+</script>
     <script src="js/script.js"></script>
     <script src="js/goback.js"></script>
 </body>

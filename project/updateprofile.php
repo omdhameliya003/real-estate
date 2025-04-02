@@ -86,15 +86,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // New Password Validation
+    // if (empty($newpass)) {
+    //     $newpassErr = "* New password is required.";
+    //     $valid = false;
+    // } elseif (strlen($newpass) < 8) {
+    //     $newpassErr = "* Password must be at least 8 characters.";
+    //     $valid = false;
+    // }else{
+    //   $newpassErr="";
+    // }
     if (empty($newpass)) {
-        $newpassErr = "* New password is required.";
-        $valid = false;
-    } elseif (strlen($newpass) < 8) {
-        $newpassErr = "* Password must be at least 8 characters.";
-        $valid = false;
-    }else{
-      $newpassErr="";
-    }
+      $newpassErr = "* New password is required.";
+      $valid = false;
+  } elseif (strlen($newpass) < 8) {
+      $newpassErr = "* Password must be at least 8 characters.";
+      $valid = false;
+  } elseif (!preg_match('/[A-Z]/', $newpass)) {
+      $newpassErr = "* Password must contain at least one uppercase letter.";
+      $valid = false;
+  } elseif (!preg_match('/[a-z]/', $newpass)) {
+      $newpassErr = "* Password must contain at least one lowercase letter.";
+      $valid = false;
+  } elseif (!preg_match('/[0-9]/', $newpass)) {
+      $newpassErr = "* Password must contain at least one digit.";
+      $valid = false;
+  } elseif (!preg_match('/[!@#$%^&*(),.?":{}|<>]/', $newpass)) {
+      $newpassErr = "* Password must contain at least one special character.";
+      $valid = false;
+  } else {
+      $newpassErr = ""; // Clear error message if valid
+  }
+  
 
     // Confirm Password Validation
     if (empty($con_pass)) {
