@@ -159,7 +159,10 @@ function funcvalidation() {
   if (mobile === "" || isNaN(mobile) || mobile.length !== 10) {
     errmobile.innerHTML = "*Please enter a valid  10 digit mobile number.";
     return (isValid = false);
-  } else {
+  }else if (!/^[6-9]\d{9}$/.test(mobile)) {
+    errmobile.innerHTML = "*Mobile number must start with 6, 7, 8, or 9.";
+    return (isValid = false);
+}else {
     errmobile.innerHTML = "";
   }
 
